@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,23 +78,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'CRM.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-#     'default':{
-#         'ENGINE': 'django.db.backends.mysql',
-#             'NAME': 'crm',
-#             'USER' :'root',
-#             'PASSWORD':'2901',
-#             'HOST':'127.0.0.1',
-#             "PORT": '3306'    
-#     }
 DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL')  # Fallback to DATABASE_URL from the .env file
+    )
 }
+
 
 
 # Password validation
