@@ -78,11 +78,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'CRM.wsgi.application'
 
 
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL')  
+        default=os.getenv('DATABSE_URL')
     )
 }
+
 
 
 # Password validation
